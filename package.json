@@ -1,0 +1,17 @@
+{
+  "name": "liquor-pos",
+  "version": "1.0.0",
+  "description": "Club liquor shop POS (MySQL)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.24.6"
+  }
+}

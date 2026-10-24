@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boss login</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
+        url('/shelf2.jpg') center / cover no-repeat fixed;
+      background-color: #2b1b06;background-size: cover;background-position: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <div class="card">
+      <h1>Boss login</h1>
+      <label for="username">Username</label>
+      <input id="username" autocomplete="username" autofocus>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password">
+      <p id="msg" class="msg error" role="alert"></p>
+      <button id="go" class="btn big">Sign in</button>
+      <p class="muted"><a href="/index.html">Back</a></p>
+    </div>
+  </div>
+  <script>const ROLE = 'boss';</script>
+  <script src="/login.js"></script>
+</body>
+</html>

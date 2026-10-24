@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Club Liquor Shop</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Club Liquor Shop</h1>
+    <div>
+      <span class="who" id="who"></span>
+      <button id="logout" class="btn ghost small">Log out</button>
+    </div>
+  </header>
+  <nav class="tabs" id="tabs">
+    <button data-tab="sell" class="active">Sell</button>
+    <button data-tab="stock">Stock</button>
+    <button data-tab="sales">Sales</button>
+    <button data-tab="audit" class="boss-only" hidden>Audit log</button>
+    <button data-tab="export" class="boss-only" hidden>Exports</button>
+  </nav>
+  
+
+  <main>
+    <!-- SELL -->
+    <section id="tab-sell" class="tab active">
+      <div class="grid2">
+        <div class="panel">
+          <h2>Products</h2>
+          <input id="search" placeholder="Search products" aria-label="Search products">
+          <div class="picker" id="picker"></div>
+        </div>
+        <div class="panel">
+          <h2>Current sale</h2>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>Item</th><th>Qty</th><th class="num">Total</th><th></th></tr></thead>
+              <tbody id="cart"></tbody>
+            </table>
+          </div>
+          <p class="empty" id="cartEmpty">Select a product to add it to the sale.</p>
+          <div class="total"><span>Total</span><span id="total">KES 0.00</span></div>
+
+          <div class="paychoice">
+            <label><input type="radio" name="pay" value="cash" checked> Cash</label>
+            <label><input type="radio" name="pay" value="mpesa"> M-Pesa</label>
+          </div>
+          <div id="phoneBox" hidden>
+            <label for="phone">Buyer's phone number</label>
+            <input id="phone" placeholder="0712345678" inputmode="tel">
+          </div>
+          <p class="msg" id="sellMsg" role="status"></p>
+          <button class="btn big" id="completeBtn">Complete sale</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOCK -->
+    <section id="tab-stock" class="tab">
+      <div class="grid2">
+        <div class="panel">
+          <h2>Stock on hand</h2>
+          <div class="tablewrap">
+            <table>
+              <thead id="stockHead"></thead>
+              <tbody id="stockBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="panel">
+            <h2>Add stock to a product</h2>
+            <label for="stockProduct">Product</label>
+            <select id="stockProduct"></select>
+            <label for="stockQty">Quantity added</label>
+            <input id="stockQty" type="number" min="1">
+            <label for="stockBuy">Buying price (leave empty to keep the current one)</label>
+            <input id="stockBuy" type="number" min="0" step="0.01">
+            <p class="msg" id="stockMsg" role="status"></p>
+            <button class="btn" id="addStockBtn">Add stock</button>
+          </div>
+          <div class="panel">
+            <h2>Add a new product</h2>
+            <label for="newName">Name</label>
+            <input id="newName">
+            <label for="newType">Type</label>
+            <input id="newType" list="typeList" placeholder="Beer, Whisky, ...">
+            <datalist id="typeList"></datalist>
+            <div class="grid3">
+              <div><label for="newBuy">Buying price</label><input id="newBuy" type="number" min="0" step="0.01"></div>
+              <div><label for="newSell">Selling price</label><input id="newSell" type="number" min="0" step="0.01"></div>
+              <div><label for="newQty">Quantity</label><input id="newQty" type="number" min="0"></div>
+            </div>
+            <p class="msg" id="newMsg" role="status"></p>
+            <button class="btn" id="addProductBtn">Save product</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SALES -->
+    <section id="tab-sales" class="tab">
+      <div class="panel">
+        <h2 id="salesTitle">Sales</h2>
+        <div class="tablewrap">
+          <table>
+            <thead id="salesHead"></thead>
+            <tbody id="salesBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIT -->
+    <section id="tab-audit" class="tab">
+      <div class="panel">
+        <h2>Audit log</h2>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th><th>IP</th></tr></thead>
+            <tbody id="auditBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPORT -->
+    <section id="tab-export" class="tab">
+      <div class="panel">
+        <h2>Download data</h2>
+        <p class="muted">Files open in Excel.</p>
+        <p><a href="/api/export/products">Products and stock</a></p>
+        <p><a href="/api/export/sales">Sales</a></p>
+        <p><a href="/api/export/sale_items">Items sold</a></p>
+        <p><a href="/api/export/stock_entries">Stock added</a></p>
+        <p><a href="/api/export/mpesa">M-Pesa payments</a></p>
+        <p><a href="/api/export/audit">Audit log</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- RECEIPT -->
+  <div class="modal" id="receiptModal">
+    <div class="box">
+      <div class="receipt" id="receipt"></div>
+      <div class="actions">
+        <button class="btn" id="printBtn">Print receipt</button>
+        <button class="btn light" id="closeReceipt">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
